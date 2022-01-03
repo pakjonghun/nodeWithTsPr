@@ -21,18 +21,6 @@
   },
   "homepage": "https://github.com/pakjonghun/nodeWithTsPr#readme",
   "dependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/cookie-parser": "^1.4.2",
-    "@types/cors": "^2.8.12",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.13",
-    "@types/faker": "^5.5.9",
-    "@types/joi": "^17.2.3",
-    "@types/json2csv": "^5.0.3",
-    "@types/jsonwebtoken": "^8.5.6",
-    "@types/morgan": "^1.9.3",
-    "@types/multer": "^1.4.7",
-    "@types/nodemon": "^1.19.1",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -50,6 +38,18 @@
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/faker": "^5.5.9",
+    "@types/joi": "^17.2.3",
+    "@types/json2csv": "^5.0.3",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
+    "@types/nodemon": "^1.19.1",
     "@types/node": "^17.0.6"
   }
 }
