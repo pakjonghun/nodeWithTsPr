@@ -14,9 +14,9 @@ export const register = async ({ name, permissions }) => {
 export const getAllRoles = async (page, take) => {
   const roleRepo = getManager().getRepository(Roles);
   return roleRepo.findAndCount({
+    relations: ["permissions"],
     take,
     skip: (page - 1) * take,
-    relations: ["permissions"],
   });
 };
 
