@@ -14,3 +14,20 @@ export const register = async (req: Request, res: Response, next: Function) => {
     res.sendStatus(500);
   }
 };
+
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const id = req.params.id;
+    if (id == null) return res.status(400).json({ message: "insert id plz" });
+
+    await service.deleteUser(Number(id));
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};

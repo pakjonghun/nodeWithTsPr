@@ -1,7 +1,7 @@
 import { tokenMiddleware } from "./../middleware/token.middleware";
 import { permissionMiddleware } from "./../middleware/permission.middleware";
 import { Router } from "express";
-import { register } from "../controller/admin.controller";
+import { deleteUser, register } from "../controller/admin.controller";
 
 const router = Router();
 
@@ -10,6 +10,13 @@ router.post(
   tokenMiddleware,
   permissionMiddleware("user"),
   register
+);
+
+router.delete(
+  "/delete",
+  tokenMiddleware,
+  permissionMiddleware("user"),
+  deleteUser
 );
 
 export default router;

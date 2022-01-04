@@ -9,3 +9,8 @@ export const register = async (body) => {
   delete save.roleId;
   return adminRepo.save(save);
 };
+
+export const deleteUser = async (id: number) => {
+  const userRepo = getManager().getRepository(Users);
+  await userRepo.delete(id);
+};
