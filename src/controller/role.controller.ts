@@ -72,8 +72,8 @@ export const editRole = async (req: Request, res: Response, next: Function) => {
 
     if (error) return res.status(400).json(error.details);
     if (id == null) return res.status(400).json({ message: "no id" });
-
     const result = await service.editRole(Number(id), body);
+    res.sendStatus(201);
   } catch (err) {
     next(err);
     res.sendStatus(500);

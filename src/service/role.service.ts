@@ -4,7 +4,6 @@ import { getConnection, getManager } from "typeorm";
 
 export const register = async ({ name, permissions }) => {
   const roleRepo = getManager().getRepository(Roles);
-
   return roleRepo.save({
     name,
     permissions: permissions.map((id) => ({ id })),
@@ -35,11 +34,13 @@ export const deleteRole = async (id: number) => {
 
 export const editRole = async (id: number, { permissions, name }) => {
   const roleRepo = getManager().getRepository(Roles);
-  await roleRepo.save({
+  console.log(id, permissions, name);
+  const edited = await roleRepo.save({
     id,
     ...(name && { name }),
     ...(permissions?.length && {
-      permissions: permissions.map((permission) => ({ id: permission.id })),
+      permissions: permissions.map((permission) => ({ id: permission })),
     }),
   });
+  return edited;
 };
