@@ -23,14 +23,15 @@ export const getAllUsers = async (page) => {
       "u.email email",
       "u.firstname firstname",
       "u.lastname lastname",
+      "JSON_OBJECT('id',r.id,'name',r.name) role",
     ])
+    .leftJoin("roles", "r", "r.id=u.role_id")
     .from(Users, "u");
-
   const total = await builder.getCount();
-
   const users = await builder
-    .take(5)
-    .skip((page - 1) * take)
+    .orderBy("u.id", "DESC")
+    .limit(take)
+    .offset(page * take)
     .execute();
 
   return {

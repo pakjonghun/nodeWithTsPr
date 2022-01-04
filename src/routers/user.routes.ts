@@ -5,18 +5,20 @@ import {
   getAllUsers,
   getUser,
   login,
+  logout,
   me,
   register,
 } from "../controller/user.controller";
 
 const router = Router();
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/me", tokenMiddleware, me);
-router.get("/", getAllUsers);
-router.put("/:id", tokenMiddleware, editUser);
-
-router.get("/:id", tokenMiddleware, getUser);
+router
+  .post("/register", register)
+  .get("/logout", logout)
+  .post("/login", login)
+  .get("/me", tokenMiddleware, me)
+  .get("/", getAllUsers)
+  .put("/:id", tokenMiddleware, editUser)
+  .get("/:id", tokenMiddleware, getUser);
 
 export default router;

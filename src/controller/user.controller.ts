@@ -2,6 +2,7 @@ import { loginValidator } from "./../validator/user.validator";
 import { Request, Response } from "express";
 import { editValidator, registerValidator } from "../validator/user.validator";
 import * as service from "../service/user.service";
+import { nextTick } from "process";
 
 export const register = async (req: Request, res: Response, next: Function) => {
   try {
@@ -29,10 +30,19 @@ export const getUser = async (req: Request, res: Response) => {
   res.json(user);
 };
 
-export const getAllUsers = async (req: Request, res: Response) => {
-  const page = parseInt((req.query.page as string) || "1");
-  const result = await service.getAllUsers(page);
-  res.json(result);
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const page = parseInt((req.query.page as string) || "0");
+    const result = await service.getAllUsers(page);
+    res.json(result);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
 };
 
 export const editUser = async (req: Request, res: Response, next: Function) => {
@@ -72,4 +82,9 @@ export const login = async (req: Request, res: Response, next: Function) => {
 
 export const me = (_: Request, res: Response) => {
   res.json(res.locals.user);
+};
+
+export const logout = async (req: Request, res: Response) => {
+  res.cookie("jwt", "", { maxAge: 0 });
+  res.sendStatus(200);
 };
