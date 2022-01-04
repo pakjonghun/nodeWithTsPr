@@ -42,10 +42,15 @@ export const getAllUsers = async (page) => {
 
 export const editUser = async (id, body) => {
   const userRepo = getManager().getRepository(Users);
-  return userRepo.save({
+  const tempObj = {
     id: Number(id),
     ...body,
-  });
+    role: {
+      id: Number(body.roleId),
+    },
+  };
+  delete tempObj.roleId;
+  return userRepo.save(tempObj);
 };
 
 export const login = async ({ email, password }) => {
