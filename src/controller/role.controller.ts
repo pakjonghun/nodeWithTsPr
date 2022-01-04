@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerValidator } from "../validator/role.validator";
+import { editValidator, registerValidator } from "../validator/role.validator";
 import * as service from "../service/role.service";
 
 export const register = async (req: Request, res: Response, next: Function) => {
@@ -40,6 +40,41 @@ export const getRole = async (req: Request, res: Response, next: Function) => {
     const id = req.params.id;
     if (id == null) return res.status(400).json({ message: "no id" });
     res.json(await service.getRole(id));
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};
+
+export const deleteRole = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const id = req.params.id;
+    if (id == null) {
+      return res.status(400).json({ message: "no id" });
+    }
+
+    await service.deleteRole(Number(id));
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};
+
+export const editRole = async (req: Request, res: Response, next: Function) => {
+  try {
+    const body = req.body;
+    const id = req.params.id;
+    const { error } = editValidator.validate(body);
+
+    if (error) return res.status(400).json(error.details);
+    if (id == null) return res.status(400).json({ message: "no id" });
+
+    const result = await service.editRole(Number(id), body);
   } catch (err) {
     next(err);
     res.sendStatus(500);

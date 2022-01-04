@@ -1,11 +1,20 @@
 import { permissionMiddleware } from "./../middleware/permission.middleware";
 import { Router } from "express";
-import { getAllRoles, getRole, register } from "../controller/role.controller";
+import {
+  deleteRole,
+  editRole,
+  getAllRoles,
+  getRole,
+  register,
+} from "../controller/role.controller";
 
 const router = Router();
 
-router.post("/register", permissionMiddleware("role"), register);
-router.get("/", getAllRoles);
-router.get("/:id", getRole);
+router
+  .post("/register", permissionMiddleware("role"), register)
+  .get("/", getAllRoles)
+  .get("/:id", getRole)
+  .delete("/:id", deleteRole)
+  .put("/:id", editRole);
 
 export default router;

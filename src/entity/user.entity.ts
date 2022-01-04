@@ -24,7 +24,7 @@ export class Users {
   @Column({ unique: true })
   email: string;
 
-  @ManyToOne(() => Roles)
+  @ManyToOne(() => Roles, { onDelete: "SET NULL" })
   @JoinColumn({ name: "role_id" })
   role: Roles;
 }

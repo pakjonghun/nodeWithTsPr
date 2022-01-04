@@ -27,3 +27,19 @@ export const getRole = async (id) => {
     relations: ["permissions"],
   });
 };
+
+export const deleteRole = async (id: number) => {
+  const roleRepo = getManager().getRepository(Roles);
+  await roleRepo.delete(id);
+};
+
+export const editRole = async (id: number, { permissions, ...rest }) => {
+  const roleRepo = getManager().getRepository(Roles);
+  await roleRepo.save({
+    id,
+    ...rest,
+    permissions: permissions.map((permission) => {
+      id: permission.id;
+    }),
+  });
+};
