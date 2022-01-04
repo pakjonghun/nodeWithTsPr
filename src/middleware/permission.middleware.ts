@@ -18,7 +18,6 @@ export const permissionMiddleware =
         const r = user.role.permissions.some((p) => {
           return p.name === "edit_" + access;
         });
-
         if (r) {
           next();
           return;

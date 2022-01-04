@@ -33,13 +33,13 @@ export const deleteRole = async (id: number) => {
   await roleRepo.delete(id);
 };
 
-export const editRole = async (id: number, { permissions, ...rest }) => {
+export const editRole = async (id: number, { permissions, name }) => {
   const roleRepo = getManager().getRepository(Roles);
   await roleRepo.save({
     id,
-    ...rest,
-    permissions: permissions.map((permission) => {
-      id: permission.id;
+    ...(name && { name }),
+    ...(permissions?.length && {
+      permissions: permissions.map((permission) => ({ id: permission.id })),
     }),
   });
 };

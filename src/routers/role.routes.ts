@@ -1,3 +1,4 @@
+import { tokenMiddleware } from "./../middleware/token.middleware";
 import { permissionMiddleware } from "./../middleware/permission.middleware";
 import { Router } from "express";
 import {
@@ -11,7 +12,7 @@ import {
 const router = Router();
 
 router
-  .post("/register", permissionMiddleware("role"), register)
+  .post("/register", tokenMiddleware, permissionMiddleware("role"), register)
   .get("/", getAllRoles)
   .get("/:id", getRole)
   .delete("/:id", deleteRole)
