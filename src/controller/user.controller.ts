@@ -2,7 +2,6 @@ import { loginValidator } from "./../validator/user.validator";
 import { Request, Response } from "express";
 import { editValidator, registerValidator } from "../validator/user.validator";
 import * as service from "../service/user.service";
-import { nextTick } from "process";
 
 export const register = async (req: Request, res: Response, next: Function) => {
   try {

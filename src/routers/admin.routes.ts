@@ -13,7 +13,7 @@ router.post(
 );
 
 router.delete(
-  "/delete",
+  "/:id",
   tokenMiddleware,
   permissionMiddleware("user"),
   deleteUser

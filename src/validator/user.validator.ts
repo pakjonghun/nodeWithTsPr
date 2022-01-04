@@ -9,7 +9,6 @@ export const registerValidator = Joi.object({
 });
 
 export const editValidator = Joi.object({
-  id: Joi.number().required(),
   firstname: Joi.string(),
   lastname: Joi.string(),
   email: Joi.string().email(),

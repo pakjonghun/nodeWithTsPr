@@ -20,7 +20,6 @@ export const getAllRoles = async (req: Request, res: Response) => {
   const take = 15;
   const page = parseInt((req.query.page as string) || "1");
   const [roles, total] = await service.getAllRoles(page, take);
-
   res.json({
     data: roles,
     meta: { total, page, lastPage: Math.ceil(total / take) },

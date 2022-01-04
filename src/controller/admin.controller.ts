@@ -5,6 +5,7 @@ import * as service from "../service/admin.service";
 export const register = async (req: Request, res: Response, next: Function) => {
   try {
     const body = req.body;
+    console.log(body);
     const { error } = registerValidator.validate(body);
     if (error) return res.status(400).json(error.details);
     const admin = await service.register(body);

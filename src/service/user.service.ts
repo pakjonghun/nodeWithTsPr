@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export const register = async (body) => {
   const userRepo = getManager().getRepository(Users);
   body.password = await bcrypt.hash(body.password, 10);
-  return userRepo.save({ ...body, role: { id: 2 } });
+  return userRepo.save({ ...body, role: { id: 3 } });
 };
 
 export const getUser = async (id) => {
