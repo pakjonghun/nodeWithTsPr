@@ -5,7 +5,7 @@ import {
   registerValidator,
 } from "../validator/product.validator";
 import * as service from "../service/product.service";
-import { json } from "stream/consumers";
+import { nextTick } from "process";
 
 export const register = async (req: Request, res: Response, next: Function) => {
   try {
@@ -20,15 +20,25 @@ export const register = async (req: Request, res: Response, next: Function) => {
   }
 };
 
-export const getAllProducts = async (req: Request, res: Response) => {
-  const take = 15;
-  const page = parseInt((req.query.page as string) || "1");
+export const getAllProducts = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const take = 15;
+    const page = parseInt((req.query.page as string) || "0") || 1;
 
-  const [roles, total] = await service.getAllProducts(take, page);
-  res.json({
-    data: roles,
-    meta: { total, page, lastPage: Math.ceil(total / take) },
-  });
+    const [roles, total] = await service.getAllProducts(take, page);
+    console.log(total, take, page);
+    res.json({
+      data: roles,
+      meta: { total, page, lastPage: Math.ceil(total / take) },
+    });
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
 };
 
 export const getProduct = async (req: Request, res: Response) => {
