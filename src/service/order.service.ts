@@ -1,9 +1,9 @@
+import { OrderItems } from "./../entity/orderItem.entity";
 import { Orders } from "./../entity/order.entity";
 import { getManager } from "typeorm";
 import { Parser } from "json2csv";
 export const getAllOrders = async (page, take) => {
   const orderRepo = getManager().getRepository(Orders);
-  console.log(page);
   return orderRepo.findAndCount({
     take,
     skip: (page - 1) * take,
@@ -72,4 +72,19 @@ export const chart = async () => {
 export const deleteOrder = async (id: number) => {
   const orderRepo = getManager().getRepository(Orders);
   await orderRepo.delete(id);
+};
+
+export const editOrder = async (id: number, body) => {
+  const repo = getManager().getRepository(Orders);
+  const payload = {
+    id,
+    ...body,
+    ...(body.orderItems && {
+      orderItems: body.orderItems.map((id) => {
+        id;
+      }),
+    }),
+  };
+
+  await repo.save(payload);
 };

@@ -1,3 +1,5 @@
+import { Orders } from "./../entity/order.entity";
+import { getManager } from "typeorm";
 import { Response, Request } from "express";
 import { Parser } from "json2csv";
 import * as service from "../service/order.service";
@@ -53,6 +55,20 @@ export const deleteOrder = async (
     if (id == null) return res.status(400).json({ message: "no id" });
     await service.deleteOrder(id);
     res.sendStatus(204);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};
+
+export const editOrder = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    await service.editOrder;
+    res.sendStatus(203);
   } catch (err) {
     next(err);
     res.sendStatus(500);
