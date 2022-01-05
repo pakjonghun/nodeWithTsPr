@@ -87,3 +87,30 @@ export const logout = async (req: Request, res: Response) => {
   res.cookie("jwt", "", { maxAge: 0 });
   res.sendStatus(200);
 };
+
+export const editInfo = async (req: Request, res: Response, next: Function) => {
+  try {
+    const body = req.body;
+    const id = res.locals.user.id;
+    const result = await service.editInfo(id, body);
+    res.status(203).json(result);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};
+export const editPassword = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const body = req.body;
+    const id = res.locals.user.id;
+    const result = await service.editPassword(id, body);
+    res.status(203).json(result);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};

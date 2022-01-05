@@ -1,3 +1,4 @@
+import { editInfo } from "./../controller/user.controller";
 import { tokenMiddleware } from "./../middleware/token.middleware";
 import { Router } from "express";
 import {
@@ -9,6 +10,7 @@ import {
   me,
   register,
 } from "../controller/user.controller";
+import { editProduct } from "../service/product.service";
 
 const router = Router();
 
@@ -17,6 +19,8 @@ router
   .get("/logout", logout)
   .post("/login", login)
   .get("/me", tokenMiddleware, me)
+  .put("/info", tokenMiddleware, editInfo)
+  .put("/password", tokenMiddleware, editProduct)
   .get("/", getAllUsers)
   .put("/:id", tokenMiddleware, editUser)
   .get("/:id", tokenMiddleware, getUser);

@@ -13,7 +13,7 @@ const router = Router();
 
 router
   .post("/", tokenMiddleware, register)
-  .post("/extract", tokenMiddleware, extract)
+  .get("/extract", tokenMiddleware, extract)
   .get("/", tokenMiddleware, getAllOrders)
   .get("/chart", tokenMiddleware, chart)
   .get("/:id", tokenMiddleware, getOrder)

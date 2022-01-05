@@ -65,3 +65,19 @@ export const login = async ({ email, password }) => {
 
   return { user, token };
 };
+
+export const editInfo = async (id, body) => {
+  const userRepo = getManager().getRepository(Users);
+  return userRepo.save({
+    id,
+    ...body,
+  });
+};
+
+export const editPassword = async (id, body) => {
+  const userRepo = getManager().getRepository(Users);
+  return userRepo.save({
+    id,
+    ...body,
+  });
+};
