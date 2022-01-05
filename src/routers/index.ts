@@ -16,6 +16,6 @@ router.use("/admin", adminRouter);
 router.use("/products", productRouter);
 router.use("/permissions", permissioinRouter);
 router.use("/orders", orderRouter);
-router.post("/upload", tokenMiddleware, imageUplaod);
+router.post("/upload", imageUplaod);
 
 export default router;

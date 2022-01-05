@@ -5,7 +5,6 @@ import {
   registerValidator,
 } from "../validator/product.validator";
 import * as service from "../service/product.service";
-import { nextTick } from "process";
 
 export const register = async (req: Request, res: Response, next: Function) => {
   try {
@@ -30,7 +29,6 @@ export const getAllProducts = async (
     const page = parseInt((req.query.page as string) || "0") || 1;
 
     const [roles, total] = await service.getAllProducts(take, page);
-    console.log(total, take, page);
     res.json({
       data: roles,
       meta: { total, page, lastPage: Math.ceil(total / take) },

@@ -2,6 +2,7 @@ import { tokenMiddleware } from "./../middleware/token.middleware";
 import { Router } from "express";
 import {
   deleteProduct,
+  editProduct,
   getAllProducts,
   getProduct,
   register,
@@ -14,6 +15,7 @@ router
   .post("/register", tokenMiddleware, register)
   .get("/", getAllProducts)
   .get("/:id", getProduct)
+  .put("/:id", editProduct)
   .delete(
     "/:id",
     tokenMiddleware,
