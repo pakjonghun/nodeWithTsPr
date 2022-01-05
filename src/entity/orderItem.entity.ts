@@ -15,6 +15,6 @@ export class OrderItems {
   @Column()
   title: string;
 
-  @ManyToOne(() => Orders, (o) => o.orderItems)
+  @ManyToOne(() => Orders, (o) => o.orderItems, { onDelete: "CASCADE" })
   order: Orders;
 }

@@ -3,6 +3,7 @@ import { getManager } from "typeorm";
 import { Parser } from "json2csv";
 export const getAllOrders = async (page, take) => {
   const orderRepo = getManager().getRepository(Orders);
+  console.log(page);
   return orderRepo.findAndCount({
     take,
     skip: (page - 1) * take,
@@ -66,4 +67,9 @@ export const chart = async () => {
     GROUP BY(orders.id);
     `
   );
+};
+
+export const deleteOrder = async (id: number) => {
+  const orderRepo = getManager().getRepository(Orders);
+  await orderRepo.delete(id);
 };

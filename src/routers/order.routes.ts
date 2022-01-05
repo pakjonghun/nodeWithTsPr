@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   chart,
+  deleteOrder,
   extract,
   getAllOrders,
   getOrder,
@@ -14,6 +15,7 @@ router
   .post("/extract", tokenMiddleware, extract)
   .get("/", tokenMiddleware, getAllOrders)
   .get("/chart", tokenMiddleware, chart)
-  .get("/:id", tokenMiddleware, getOrder);
+  .get("/:id", tokenMiddleware, getOrder)
+  .delete("/:id", tokenMiddleware, deleteOrder);
 
 export default router;
