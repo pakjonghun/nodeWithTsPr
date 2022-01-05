@@ -1,7 +1,11 @@
 import { Response } from "express";
 import { Request } from "express";
-import { registerValidator } from "../validator/product.validator";
+import {
+  editValidator,
+  registerValidator,
+} from "../validator/product.validator";
 import * as service from "../service/product.service";
+import { json } from "stream/consumers";
 
 export const register = async (req: Request, res: Response, next: Function) => {
   try {
@@ -32,4 +36,40 @@ export const getProduct = async (req: Request, res: Response) => {
   if (id == null) return res.status(400).json({ message: "no id" });
 
   res.json(await service.getProduct(id));
+};
+
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const id = Number(req.params.id);
+    if (id == null) return res.status(400).json({ message: "no id" });
+    await service.deleteProduct(id);
+    res.sendStatus(203);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
+};
+
+export const editProduct = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const body = req.body;
+    const id = req.params.id;
+    const { error } = editValidator.validate(body);
+    if (error) res.status(400).json(error.details);
+    if (id == null) return res.status(400).json({ message: "no id" });
+    await service.editProduct(Number(id), body);
+
+    res.sendStatus(203);
+  } catch (err) {
+    next(err);
+    res.sendStatus(500);
+  }
 };

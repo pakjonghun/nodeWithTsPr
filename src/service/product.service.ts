@@ -16,3 +16,16 @@ export const getProduct = async (id) => {
   const productRepo = getManager().getRepository(Products);
   return productRepo.findOne(id);
 };
+
+export const deleteProduct = async (id: number) => {
+  const productRepo = getManager().getRepository(Products);
+  return productRepo.delete(id);
+};
+
+export const editProduct = async (id: number, body) => {
+  const productRepo = getManager().getRepository(Products);
+  return productRepo.save({
+    id,
+    ...body,
+  });
+};

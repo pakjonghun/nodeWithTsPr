@@ -6,3 +6,10 @@ export const registerValidator = Joi.object({
   description: Joi.string().required(),
   image: Joi.string().required(),
 });
+
+export const editValidator = Joi.object({
+  price: Joi.number(),
+  title: Joi.string(),
+  description: Joi.string(),
+  image: Joi.string(),
+});
